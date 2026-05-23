@@ -141,3 +141,31 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Python / virtualenv
+# macOS
+.DS_Store
+
+# Python virtualenvs
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+.cache/pip
+
+# Chroma DB local data
+# Ignore the entire chroma data folder (contains sqlite DB and local vector data)
+chroma/

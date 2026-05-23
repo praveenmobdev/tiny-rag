@@ -1,0 +1,7 @@
+RAG stands for Retrieval Augmented Generation.
+
+RAG combines vector search with large language models.
+
+Embeddings convert text into vectors.
+
+Vector databases store embeddings for semantic retrieval.

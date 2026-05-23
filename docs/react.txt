@@ -1,0 +1,9 @@
+React is a JavaScript library for building user interfaces.
+
+Components are reusable building blocks in React.
+
+Hooks allow functional components to manage state and side effects.
+
+useState is used for state management.
+
+useEffect is used for side effects like API calls.
