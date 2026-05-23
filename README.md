@@ -79,23 +79,42 @@ This will run two example queries (see file) and print the top matches with dist
   model is installed, and the Ollama daemon accepts embedding requests.
 - If embeddings look wrong, check that both ingestion and query use the same
   embedding model and same preprocessing (chunking).
-
 **Next steps / Improvements**
-- Add CLI flags / scripts (`npm run ingest`, `npm run query`) for convenience.
-- Add environment variable support for hosts/ports/models (via `dotenv`).
-- Improve chunking to use sentence boundaries and overlap between chunks.
-- Add unit tests and input validation.
 
 **Files of interest**
-- [src/store.js](src/store.js#L1-L40) — ingest pipeline driver.
-- [src/embedChunks.js](src/embedChunks.js#L1-L200) — reads files, chunks, calls Ollama.
-- [src/search.js](src/search.js#L1-L200) — query example and result printing.
 
 If you want, I can:
-- add `npm` scripts for ingest/query/test,
-- add a simple CLI wrapper, or
-- make config read from a `.env` file.
 
-----
 
 README created by an automated analysis script.
+**Chroma (Python) setup**
+
+To run a local Chroma server using the Python client and a virtual environment, create and activate a venv, install `chromadb`, and start the server. Example commands:
+
+```bash
+python3 -m venv path/to/venv
+source path/to/venv/bin/activate
+python3 -m pip install chromadb
+chroma run --host localhost --port 8000
+```
+
+Notes:
+- Replace `path/to/venv` with your preferred venv location (e.g. `.venv` or `venv`).
+- The `chroma run` command starts the Chroma server on the specified host and port; update `src/chroma.js` if you use different host/port settings.
+
+**Ollama setup**
+
+If you use Ollama for embeddings, pull the models you need and ensure the Ollama daemon is running. Example commands you mentioned:
+
+```bash
+# download Llama 3 (example model name)
+ollama pull llama3
+
+# pull the Nomic embedding model used here
+ollama pull nomic-embed-text
+
+# start the Ollama daemon (if not already running)
+ollama serve
+```
+
+Notes: replace model names with the exact identifiers you installed. Verify Ollama is running before running the JS embedding scripts in this repo.
