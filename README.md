@@ -16,6 +16,7 @@ vector database.
 - **Chunk + embed:** [src/embedChunks.js](src/embedChunks.js#L1-L200) and [src/chunk.js](src/chunk.js#L1-L50)
 - **Direct embedding test:** [src/embed.js](src/embed.js#L1-L200)
 - **Search / query:** [src/search.js](src/search.js#L1-L200)
+- **Complete RAG with LLM generation:** [src/rag.js](src/rag.js#L1-L100)
 - **Chroma client config:** [src/chroma.js](src/chroma.js#L1-L20)
 - **Helpers / utilities:** [src/listCollections.js](src/listCollections.js#L1-L50), [src/inspect.js](src/inspect.js#L1-L50), [src/testConnection.js](src/testConnection.js#L1-L40)
 
@@ -62,6 +63,20 @@ node src/search.js
 
 This will run two example queries (see file) and print the top matches with distances and metadata.
 
+**Complete RAG with LLM Generation**
+For a full Retrieval-Augmented Generation experience, run the RAG script which retrieves relevant chunks and generates answers using an LLM:
+
+```bash
+node src/rag.js
+```
+
+This script demonstrates the complete RAG pipeline:
+1. **Retrieve:** embeds your query and finds the most similar chunks from ChromaDB
+2. **Augment:** combines retrieved chunks into a context string
+3. **Generate:** sends the context and query to an LLM (Llama 3) to produce a natural language answer
+
+The script includes three example queries to test the RAG workflow end-to-end.
+
 **Useful utilities**
 - Test Chroma connection: `node src/testConnection.js`
 - List collections: `node src/listCollections.js`
@@ -87,14 +102,24 @@ If you want, I can:
 
 
 README created by an automated analysis script.
+
 **Chroma (Python) setup**
 
-To run a local Chroma server using the Python client and a virtual environment, create and activate a venv, install `chromadb`, and start the server. Example commands:
+To run a local Chroma server using the Python client and a virtual environment, follow these steps.
+
+First time (create venv, install `chromadb`, then start the server):
 
 ```bash
 python3 -m venv path/to/venv
 source path/to/venv/bin/activate
 python3 -m pip install chromadb
+chroma run --host localhost --port 8000
+```
+
+Subsequent runs (activate the existing venv and start the server):
+
+```bash
+source path/to/venv/bin/activate
 chroma run --host localhost --port 8000
 ```
 

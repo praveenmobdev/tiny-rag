@@ -41,21 +41,32 @@ async function search(query, nResults = 3) {
 
     results.documents[0].forEach((doc, index) => {
 
-        console.log(`RESULT ${index + 1}`);
-        console.log("----------------------------");
+        const distance = results.distances[0][index];
 
-        console.log("DOCUMENT:");
+        // Ignore weak matches
+
+        if (distance > 0.7) {
+            return;
+        }
+
+        const metadata = results.metadatas[0][index];
+
+        console.log(`\nRESULT ${index + 1}`);
+        console.log("=".repeat(50));
+
+        console.log("DISTANCE:");
+        console.log(distance);
+
+        console.log("\nSOURCE:");
+        console.log(metadata.source);
+
+        console.log("\nTEXT:");
         console.log(doc);
-
-        console.log("\nMETADATA:");
-        console.log(results.metadatas[0][index]);
-
-        console.log("\nDISTANCE:");
-        console.log(results.distances[0][index]);
 
         console.log("\n");
     });
 }
 
-await search("What is React state?");
-await search("Explain RAG systems");
+// await search("What is React state?");
+await search("React hooks");
+await search("banana spaceship potato");
